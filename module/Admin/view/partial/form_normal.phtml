@@ -1,0 +1,28 @@
+<?php echo $this->partial('admin/partial/form_title', ['moduleName' => $moduleName]); ?>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <?php echo $this->partial('admin/partial/form_action_title', ['actionName' => $actionName]); ?>
+            <div class="x_content">
+                <?php echo $this->partial('admin/partial/message', array('msgError' =>  $msgError, 'msgInfo' => $msgInfo)); ?>
+                <?php echo $this->partial('admin/partial/message_line', array('msgInfoLine' => $msgInfoLine, 'msgErrorLine' => $msgErrorLine)); ?>
+
+                <br/>
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal form-label-left', 'id' => 'frm', 'novalidate' => '']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+
+                <?php echo $this->partial($viewName, ['form' => $form, 'module' => $module]); ?>
+
+                <div class="ln_solid"></div>
+                <?php echo $this->partial('admin/partial/form_button', ['form' => $form, 'module' => $module]); ?>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+

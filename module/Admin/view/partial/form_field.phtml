@@ -1,0 +1,10 @@
+
+<?php foreach($formElements as $k => $v) {?>
+<div class="item form-group">
+    <?php echo $this->formLabel($form->get($k)); ?>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <?php echo $this->$v($form->get($k)); ?>
+        <?php echo $this->formElementErrors($form->get($k), array('class' => 'error-message')); ?>
+    </div>
+</div>
+<?php }?>

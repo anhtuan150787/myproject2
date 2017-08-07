@@ -1,0 +1,37 @@
+
+<table class="table table-striped jambo_table bulk_action">
+    <thead>
+    <tr class="headings">
+        <th>
+            <input type="checkbox" class="checkbox_all" />
+        </th>
+        <th class="column-title">Menu</th>
+        <th class="column-title">Url</th>
+        <th class="column-title">Trạng thái</th>
+        <th class="column-title">Chức năng</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach ($data['records'] as $record) { ?>
+        <tr class="even pointer">
+            <td><input type="checkbox" class="checkbox_item" name="check_item[]"
+                       value="<?php echo $record['menu_id']; ?>"/></td>
+            </td>
+            <td class=" "><a href="<?php echo $this->url('admin/default', array('controller' => $module ,'action' => 'edit'), array('query' => array('id' => $record['menu_id']))); ?>"><?php echo str_repeat('__', $record['menu_level']) . ' <strong>' . $record['menu_name'] . '</strong>'; ?></a></td>
+            <td class=" "><?php echo $this->escapeHtml($record['menu_url']); ?></td>
+            <td class=" "><?php echo $data['status'][$record['menu_status']]; ?></td>
+            <td class=" ">
+                <a data-toggle="tooltip" data-original-title="Cập nhật" data-placement="top" href="<?php echo $this->url('admin/default', array('controller' => $module ,'action' => 'edit'), array('query' => array('id' => $record['menu_id']))); ?>">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a data-toggle="tooltip" data-original-title="Xóa" data-placement="top" onclick="return confirmDelete()"
+                   href="<?php echo $this->url('admin/default', array('controller' => $module, 'action' => 'delete'), array('query' => array('id' => $record['menu_id']))); ?>">
+                    <i class="fa fa-remove"></i>
+                </a>
+
+            </td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>

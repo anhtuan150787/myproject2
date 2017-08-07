@@ -1,0 +1,5 @@
+ul.error-message {padding-left: 0;}
+ul.error-message li {list-style-type: none; text-align: left; color: red;}
+
+.login_form .item {position: relative}
+.login_form .item .alert{position: absolute !important; top: 0; left: 340px;}

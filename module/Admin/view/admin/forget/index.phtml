@@ -1,0 +1,38 @@
+<div class="animate form login_form">
+    <section class="login_content">
+
+        <h1>Quên mật khẩu</h1>
+
+        <?php echo $this->partial('admin/partial/message', array('msgError' => $msgError, 'msgInfo' => $msgInfo)); ?>
+        <?php echo $this->partial('admin/partial/message_line', array('msgErrorLine' => $msgErrorLine, 'msgInfoLine' => $msgInfoLine)); ?>
+
+        <?php if ($msgInfoLine == '' && $msgInfoLine == '') { ?>
+            <?php
+            $form->setAttribute('novalidate', '');
+            $form->prepare();
+            echo $this->form()->openTag($form);
+            ?>
+            <div class="item form-group">
+                <?php echo $this->formElement($form->get('users_email')); ?>
+                <?php echo $this->formElementerrors($form->get('users_email'), ['class' => 'error-message']); ?>
+            </div>
+
+            <div>
+                <?php echo $this->formSubmit($form->get('users_submit')); ?>
+                <?php echo $this->formHidden($form->get('csrf')); ?>
+                <a class="reset_pass"
+                   href="<?php echo $this->url('admin/default', array('controller' => 'login', 'action' => 'index')); ?>">Đăng
+                    nhập</a>
+            </div>
+            <div class="clearfix"></div>
+            <?php echo $this->form()->closeTag(); ?>
+        <?php } else { ?>
+            <div>
+                <a class="reset_pass"
+                   href="<?php echo $this->url('admin/default', array('controller' => 'login', 'action' => 'index')); ?>">Đăng
+                    nhập</a>
+            </div>
+        <?php } ?>
+    </section>
+</div>
+

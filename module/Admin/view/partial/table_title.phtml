@@ -1,0 +1,14 @@
+<div class="x_title">
+    <h2><?php echo $moduleName;?></h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a  id="btn_del_list" href="javascript:void(0);" >Xóa đã chọn</a></li>
+            </ul>
+        </li>
+        <li><a href="<?php echo $this->url('admin/default', ['controller' => $module, 'action' => 'add']);?>" data-toggle="tooltip" data-original-title="Thêm mới" data-placement="top"><i class="fa fa-plus-square-o"></i></a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+</div>

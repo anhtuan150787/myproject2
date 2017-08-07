@@ -1,0 +1,14 @@
+<?php if ($msgErrorLine && $msgErrorLine != '') { ?>
+    <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Có lỗi:</span>
+    <?php echo $msgErrorLine; ?>
+    </div><?php } ?>
+
+<?php if ($msgInfoLine && $msgInfoLine != '') { ?>
+    <div class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Thông báo:</span>
+    <?php echo $msgInfoLine; ?>
+    </div><?php } ?>
+

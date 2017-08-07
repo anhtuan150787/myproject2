@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CMS Version 2.0</title>
+
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('admin/css/layout.css'))
+        ->prependStylesheet($this->basePath('admin/build/css/custom.min.css'))
+
+        ->prependStylesheet($this->basePath('admin/vendors/pnotify/dist/pnotify.nonblock.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/pnotify/dist/pnotify.buttons.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/pnotify/dist/pnotify.css'))
+
+        ->prependStylesheet($this->basePath('admin/vendors/bootstrap-daterangepicker/daterangepicker.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/jqvmap/dist/jqvmap.min.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/iCheck/skins/flat/green.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/nprogress/nprogress.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/font-awesome/css/font-awesome.min.css'))
+        ->prependStylesheet($this->basePath('admin/vendors/bootstrap/dist/css/bootstrap.min.css'))
+    ?>
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="<?php echo $this->url('admin');?>" class="site_title"><i class="fa fa-paw"></i> <span>CMS Version 2.0</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <?php
+                        if ($user->users_picture == '') {
+                            echo '<img src="' . $this->basePath('admin/images/no-picture-person.png') . '" class="img-circle profile_img" />';
+                        } else {
+                            echo '<img src="' . $this->basePath('admin/pictures/users/' . $user->users_picture) .'" class="img-circle profile_img">';
+                        }
+                        ?>
+                    </div>
+                    <div class="profile_info">
+                        <span>Chào,</span>
+                        <h2><?php echo $user->users_fullname;?></h2>
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>Chức năng</h3>
+                        <ul class="nav side-menu">
+                            <li><a href="<?php echo $this->url('admin');?>"><i class="fa fa-home"></i> Trang chủ </a>
+                            </li>
+                            <li><a><i class="fa fa-edit"></i> Bài viết <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="form.html">Danh sách</a></li>
+                                    <li><a href="form_advanced.html">Tạo mới</a></li>
+                                    <li><a href="form_validation.html">Danh mục</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="menu_section">
+                        <h3>Hệ thống</h3>
+                        <ul class="nav side-menu">
+                            <li><a><i class="fa fa-sitemap"></i> Menu <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<?php echo $this->url('admin/default', ['controller' => 'menu', 'action' => 'index']);?>">Danh sách</a></li>
+                                    <li><a href="<?php echo $this->url('admin/default', ['controller' => 'menu', 'action' => 'add']);?>">Thêm mới</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-lock"></i> Quyền <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="#level1_1">Danh sách</a></li>
+                                    <li><a href="#level1_2">Thêm mới</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="#level1_1">Danh sách</a></li>
+                                    <li><a href="#level1_2">Thêm mới</a></li>
+                                    <li><a href="#level1_2">Nhóm</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <?php
+                                if ($user->users_picture == '') {
+                                    echo '<img src="' . $this->basePath('admin/images/no-picture-person.png') . '" />';
+                                } else {
+                                    echo '<img src="' . $this->basePath('admin/pictures/users/' . $user->users_picture) .'">';
+                                }
+                                ?>
+                                <?php echo $user->users_fullname;?>
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="javascript:;"> Cập nhật</a></li>
+                                <li><a href="<?php echo $this->url('admin/default', array('controller' => 'logout', 'action' => 'index'));?>"><i class="fa fa-sign-out pull-right"></i> Thoát</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <?php echo $this->inlineScript()
+                ->prependFile($this->basePath('admin/js/scripts.js'))
+                ->prependFile($this->basePath('admin/build/js/custom.min.js'))
+
+                ->prependFile($this->basePath('admin/vendors/validator/validator-lang.js'))
+                ->prependFile($this->basePath('admin/vendors/validator/validator.js'))
+
+                ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.nonblock.js'))
+                ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.buttons.js'))
+                ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.js'))
+
+                ->prependFile($this->basePath('admin/vendors/bootstrap-daterangepicker/daterangepicker.js'))
+                ->prependFile($this->basePath('admin/vendors/moment/min/moment.min.js'))
+
+                ->prependFile($this->basePath('admin/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'))
+                ->prependFile($this->basePath('admin/vendors/jqvmap/dist/maps/jquery.vmap.world.js'))
+                ->prependFile($this->basePath('admin/vendors/jqvmap/dist/jquery.vmap.js'))
+
+                ->prependFile($this->basePath('admin/vendors/DateJS/build/date.js'))
+                ->prependFile($this->basePath('admin/vendors/flot.curvedlines/curvedLines.js'))
+                ->prependFile($this->basePath('admin/vendors/flot-spline/js/jquery.flot.spline.min.js'))
+                ->prependFile($this->basePath('admin/vendors/flot.orderbars/js/jquery.flot.orderBars.js'))
+
+                ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.resize.js'))
+                ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.stack.js'))
+                ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.time.js'))
+                ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.pie.js'))
+                ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.js'))
+
+                ->prependFile($this->basePath('admin/vendors/skycons/skycons.js'))
+                ->prependFile($this->basePath('admin/vendors/iCheck/icheck.min.js'))
+
+                ->prependFile($this->basePath('admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'))
+                ->prependFile($this->basePath('admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'))
+
+                ->prependFile($this->basePath('admin/vendors/gauge.js/dist/gauge.min.js'))
+                ->prependFile($this->basePath('admin/vendors/Chart.js/dist/Chart.min.js'))
+                ->prependFile($this->basePath('admin/vendors/nprogress/nprogress.js'))
+                ->prependFile($this->basePath('admin/vendors/fastclick/lib/fastclick.js'))
+                ->prependFile($this->basePath('admin/vendors/bootstrap/dist/js/bootstrap.min.js'))
+                ->prependFile($this->basePath('admin/vendors/jquery/dist/jquery.min.js'))
+            ; ?>
+
+            <?php echo $this->content;?>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

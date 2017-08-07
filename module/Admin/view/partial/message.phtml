@@ -1,0 +1,23 @@
+<script>
+    $(document).ready(function(){
+
+        <?php if ($msgError && $msgError != ''){?>
+        var notify = new PNotify({
+            title: "Lỗi",
+            type: "error",
+            text: "<?php echo $msgError;?>",
+            styling: "bootstrap3",
+        })
+        <?php }?>
+
+
+        <?php if ($msgInfo && $msgInfo != ''){?>
+        var notify = new PNotify({
+            title: "Thông báo",
+            type: "info",
+            text: "<?php echo $msgInfo;?>",
+            styling: "bootstrap3",
+        })
+        <?php }?>
+    })
+</script>

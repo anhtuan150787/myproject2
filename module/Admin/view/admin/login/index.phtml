@@ -1,0 +1,29 @@
+<div class="animate form login_form">
+    <section class="login_content">
+        <?php
+        $form->setAttribute('novalidate', '');
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        ?>
+        <h1>Đăng nhập</h1>
+
+        <div class="item form-group">
+            <?php echo $this->formElement($form->get('users_email')); ?>
+            <?php echo $this->formElementerrors($form->get('users_email'), ['class' => 'error-message']); ?>
+        </div>
+        <div class="item form-group">
+            <?php echo $this->formElement($form->get('users_password')); ?>
+            <?php echo $this->formElementerrors($form->get('users_password'), ['class' => 'error-message']); ?>
+        </div>
+        <div>
+            <?php echo $this->formSubmit($form->get('users_submit')); ?>
+            <?php echo $this->formHidden($form->get('csrf')); ?>
+            <a class="reset_pass" href="<?php echo $this->url('admin/default', array('controller' => 'forget', 'action' => 'index'));?>">Quên mật khẩu?</a>
+        </div>
+        <div class="clearfix"></div>
+        <?php echo $this->form()->closeTag(); ?>
+    </section>
+</div>
+
+<?php echo $this->partial('admin/partial/message', array('msgError' =>  $msgError, 'msgInfo' => $msgInfo)); ?>
+

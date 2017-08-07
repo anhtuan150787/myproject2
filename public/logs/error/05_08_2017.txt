@@ -1,0 +1,25 @@
+2017-08-05T15:12:18+07:00 ERR (3): error-exception	127.0.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36		GET	http://myproject2/public/admin/menu/add	Zend\View\Renderer\PhpRenderer::render: Unable to render template "admin/menu/add"; resolver could not resolve to a file
+#0 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\View\View.php(205): Zend\View\Renderer\PhpRenderer->render(Object(Zend\View\Model\ViewModel))
+#1 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\View\View.php(233): Zend\View\View->render(Object(Zend\View\Model\ViewModel))
+#2 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\View\View.php(198): Zend\View\View->renderChildren(Object(Zend\View\Model\ViewModel))
+#3 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\Mvc\View\Http\DefaultRenderingStrategy.php(103): Zend\View\View->render(Object(Zend\View\Model\ViewModel))
+#4 [internal function]: Zend\Mvc\View\Http\DefaultRenderingStrategy->render(Object(Zend\Mvc\MvcEvent))
+#5 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(444): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#6 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(205): Zend\EventManager\EventManager->triggerListeners('render', Object(Zend\Mvc\MvcEvent), Array)
+#7 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(353): Zend\EventManager\EventManager->trigger('render', Object(Zend\Mvc\MvcEvent))
+#8 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(328): Zend\Mvc\Application->completeRequest(Object(Zend\Mvc\MvcEvent))
+#9 E:\www\myproject2\public\index.php(17): Zend\Mvc\Application->run()
+#10 {main}
+2017-08-05T15:12:31+07:00 ERR (3): error-exception	127.0.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36		GET	http://myproject2/public/admin/menu/add	Zend\View\Renderer\PhpRenderer::render: Unable to render template "admin/menu/add"; resolver could not resolve to a file
+#0 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\View\View.php(205): Zend\View\Renderer\PhpRenderer->render(Object(Zend\View\Model\ViewModel))
+#1 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\View\View.php(233): Zend\View\View->render(Object(Zend\View\Model\ViewModel))
+#2 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\View\View.php(198): Zend\View\View->renderChildren(Object(Zend\View\Model\ViewModel))
+#3 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\Mvc\View\Http\DefaultRenderingStrategy.php(103): Zend\View\View->render(Object(Zend\View\Model\ViewModel))
+#4 [internal function]: Zend\Mvc\View\Http\DefaultRenderingStrategy->render(Object(Zend\Mvc\MvcEvent))
+#5 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(444): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#6 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(205): Zend\EventManager\EventManager->triggerListeners('render', Object(Zend\Mvc\MvcEvent), Array)
+#7 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(353): Zend\EventManager\EventManager->trigger('render', Object(Zend\Mvc\MvcEvent))
+#8 E:\www\myproject2\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(328): Zend\Mvc\Application->completeRequest(Object(Zend\Mvc\MvcEvent))
+#9 E:\www\myproject2\public\index.php(17): Zend\Mvc\Application->run()
+#10 {main}
+2017-08-05T15:12:31+07:00 ERR (3): error-router-no-match	127.0.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36	http://myproject2/public/admin/menu/add	GET	http://myproject2/favicon.ico
