@@ -1,0 +1,25 @@
+<?php
+    $columnName = [
+        'Acl',
+        'Module',
+        'Controller',
+        'Action',
+        'Trạng thái',
+    ];
+
+
+foreach ($data['records'] as $record) {
+    $columnData[$record['acl_id']] = [
+        '<a href="' . $this->url('admin/default', array('controller' => $module ,'action' => 'edit'), array('query' => array('id' => $record['acl_id']))) .'">' . str_repeat('__', $record['acl_level']) . ' <strong>' . $this->escapeHtml($record['acl_name']) . '</strong></a>',
+        $this->escapeHtml($record['acl_module']),
+        $this->escapeHtml($record['acl_controller']),
+        $this->escapeHtml($record['acl_action']),
+        $data['status'][$record['acl_status']],
+    ];
+}
+?>
+
+<table class="table table-striped jambo_table bulk_action">
+    <?php echo $this->partial('admin/partial/table_column_name', ['columnName' => $columnName]); ?>
+    <?php echo $this->partial('admin/partial/table_column_data', ['columnData' => $columnData, 'module' => $module]); ?>
+</table>

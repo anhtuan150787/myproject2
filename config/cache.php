@@ -39,6 +39,7 @@ return array(
             'Serializer'
         ),
     ),
+    'status' => 'on',
 );
 
 

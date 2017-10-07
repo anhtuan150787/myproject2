@@ -3,3 +3,94 @@ ul.error-message li {list-style-type: none; text-align: left; color: red;}
 
 .login_form .item {position: relative}
 .login_form .item .alert{position: absolute !important; top: 0; left: 340px;}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle;
+    padding: 4px 8px
+}
+
+.btn-file > input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    font-size: 23px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4);
+    direction: ltr
+}
+
+.fileupload {
+    margin-bottom: 0px
+}
+
+.fileupload .uneditable-input {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    cursor: text
+}
+
+.fileupload .thumbnail {
+    display: inline-block;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle
+}
+
+.fileupload .thumbnail > img {
+    display: inline-block;
+    max-height: 100%;
+    vertical-align: middle
+}
+
+.fileupload .btn {
+    vertical-align: middle
+}
+
+.fileupload-new {width: 50px; height: 50px; float: left}
+.btn-fileupload {width: 100px;}
+
+.fileupload-exists .fileupload-new, .fileupload-new .fileupload-exists {
+    display: none
+}
+
+.fileupload-inline .fileupload-controls {
+    display: inline
+}
+
+.fileupload-new .input-append .btn-file {
+    -webkit-border-radius: 0 0 0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0
+}
+
+.thumbnail-borderless .thumbnail {
+    padding: 0;
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none
+}
+
+.fileupload-new.thumbnail-borderless .thumbnail {
+    border: 1px solid #ddd
+}
+
+.users-img {width: 25px; height: 25px;}
+.post-img {width: 25px; height: 25px;}
+.avatar-picture {width: 50px; height: 50px}
+
+div.captcha img {float: right; cursor: pointer;}
+input.captcha-input {width: 180px !important;}
+div.captcha ul {display: none}
+div.checkbox label {float: left; width: 100% !important; text-align: left !important;}

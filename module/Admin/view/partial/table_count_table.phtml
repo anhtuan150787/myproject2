@@ -1,0 +1,13 @@
+<?php if ($data['countTable']) {?>
+    <div class="col-sm-5">
+        <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite" style="padding-left: 5px;">
+            <?php if ($data['countTable']['total'] > 0) {?>
+                Hiển thị <?php echo $data['countTable']['from'];?>
+                <?php echo ($data['countTable']['to'] != null) ? ' đến ' . $data['countTable']['to'] : '' ;?>
+                trong tổng số <?php echo $data['countTable']['total'];?>
+            <?php } else {?>
+                Không có dữ liệu
+            <?php }?>
+        </div>
+    </div>
+<?php }?>

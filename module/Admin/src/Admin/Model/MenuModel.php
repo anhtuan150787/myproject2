@@ -4,6 +4,7 @@ namespace Admin\Model;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\NotEmpty;
 
 class MenuModel extends MasterModel implements InputFilterAwareInterface
 {
@@ -19,7 +20,20 @@ class MenuModel extends MasterModel implements InputFilterAwareInterface
 
     public function getMenus($parent = 0, $level = -1, $data = array())
     {
-        return $this->getMenuLoop($parent, $level, $data);
+        $paramsCache = ['name' => __FUNCTION__, 'params' => $this->tableName . '.' . $this->primary . '.' . $parent . '.' . $level . '.' . serialize($data)];
+        $keyCache = $this->getKeyCache($paramsCache);
+
+        if (!$this->cache->setNameSpace($this->tableName)->checkItem($keyCache)) {
+
+            $result = $this->getMenuLoop($parent, $level, $data);
+
+            $this->cache->setNameSpace($this->tableName)->set($keyCache, $result);
+
+            return $result;
+
+        } else {
+            return $this->cache->setNameSpace($this->tableName)->get($keyCache);
+        }
     }
 
     public function getMenuLoop($parent = 0, $level = -1, $data = array())
@@ -31,7 +45,7 @@ class MenuModel extends MasterModel implements InputFilterAwareInterface
         $level++;
 
         foreach($result as $row) {
-            $menu_id = $row['menu_id'];
+            $menu_id = $row[$this->primary];
 
             $data[$menu_id] = (array) $row;
             $data[$menu_id]['menu_level'] = $level;
@@ -46,26 +60,6 @@ class MenuModel extends MasterModel implements InputFilterAwareInterface
             }
         }
         return $data;
-    }
-
-    public function getMenu($options) {
-        $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE 1=1';
-        if ($options['menu_id']) {
-            $sql .= ' AND menu_id = ' . $options['menu_id'];
-        }
-        $statement = $this->tableGateway->getAdapter()->query($sql);
-        $result = $statement->execute();
-        return $result->current();
-    }
-
-    public function delete($options)
-    {
-        $sql = 'DELETE FROM ' . $this->tableName . ' WHERE 1=1';
-        if ($options['menu_id']) {
-            $sql .= ' AND menu_id=' . $options['menu_id'];
-        }
-        $statement = $this->tableGateway->getAdapter()->query($sql);
-        $result = $statement->execute();
     }
 
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -90,7 +84,7 @@ class MenuModel extends MasterModel implements InputFilterAwareInterface
                         'name' => 'not_empty',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Vui lòng nhập thông tin',
+                                NotEmpty::IS_EMPTY => 'Vui lòng nhập thông tin',
                             ]
                         ],
                         'break_chain_on_failure' => true,

@@ -1,0 +1,27 @@
+<?php
+$columnName = [
+    'Hình',
+    'Tên',
+    'Email',
+    'Nhóm quản trị',
+    'Lần đăng nhập cuối',
+    'Trạng thái',
+];
+
+foreach ($data['records'] as $record) {
+    $picture = ($record['users_picture'] == '') ? '<img class="img-circle users-img" src="' . $this->basePath('admin/images/no-picture-person.png') . '" />' : '<img class="img-circle users-img" src="' . $this->basePath('pictures/users/' . $record['users_picture']) .'">';
+    $columnData[$record['users_id']] = [
+        $picture,
+        '<a href="' . $this->url('admin/default', array('controller' => $module, 'action' => 'edit'), array('query' => array('id' => $record['users_id']))) . '">'  . ' <strong>' . $record['users_fullname'] . '</strong>' . '</a>',
+        $this->escapeHtml($record['users_email']),
+        $this->escapeHtml($record['group_users_name']),
+        $this->date()->dateTimeFormat($record['users_login_time']),
+        $data['status'][$record['users_status']],
+    ];
+}
+?>
+
+<table class="table table-striped jambo_table bulk_action">
+    <?php echo $this->partial('admin/partial/table_column_name', ['columnName' => $columnName]); ?>
+    <?php echo $this->partial('admin/partial/table_column_data', ['columnData' => $columnData, 'module' => $module]); ?>
+</table>

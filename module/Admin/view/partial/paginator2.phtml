@@ -1,0 +1,56 @@
+<?php
+$block = 5;
+$total = intval($total);
+$pageNo = max(intval($pageNo), 1);
+$pageSize = intval($pageSize);
+
+if ($pageSize >= $total) {
+    return;
+}
+
+$block = intval($block);
+$PageNum = ceil($total / $pageSize);
+$pageNo = min($pageNo, $PageNum);
+
+$PageList = '';
+$Max = min($PageNum, $block);
+$Min = 0;
+$BlockNum = ceil($total / $block);
+//$CurBlock = ceil($pageNo / $block);
+
+//$MaxDisplay = $CurBlock * $block;
+if ($BlockNum > 1) {
+    if ($pageNo > ceil($Max / 2)) {
+        $Delta = $pageNo - ceil($Max / 2);
+        $Min = $Delta;
+        $Max += $Delta;
+        $Max = min($Max, $PageNum);
+        $Min = min(max(0, $Max - $block), $Delta);
+    }
+}
+
+for ($i = $Min; $i < $Max; $i++) {
+    if ($pageNo == ($i + 1)) {
+        $PageList .= '<li class="paginate_button active"><a href="#">' . ($i + 1) . '</a></li>';
+    } else {
+        $PageList .= '<li class="paginate_button"><a href="' . $url . '?page=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
+    }
+}
+
+if ($pageNo > 1) {
+    $Prev = '<li class="paginate_button previous"><a href="' . $url . '?page=1">&laquo;</a></li>';
+} else {
+    $Prev = '<li class="paginate_button previous disabled"><a href="#"><<</a></li>';
+}
+
+if ($pageNo < $PageNum) {
+    $Next = '<li class="paginate_button next"><a href="' . $url . '?page=' . ($pageNo + 1) . '">&raquo;</a></li>';
+} else {
+    $Next = '<li class="paginate_button next disabled"><a href="#">&raquo;</a></li>';
+}
+
+echo '<div class="dataTables_paginate paging_simple_numbers">
+        <ul class="pagination">
+            ' . $Prev . $PageList . $Next . '
+        </ul>
+    </nav>';

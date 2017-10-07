@@ -49,6 +49,18 @@ class MenuForm extends Form
         ]);
 
         $this->add([
+            'name' => 'menu_icon',
+            'type' => 'Text',
+            'attributes' => [
+                'class' => 'form-control',
+            ],
+            'options' => [
+                'label' => 'Icon',
+                'label_attributes' => ['class' => 'control-label col-md-3 col-sm-3 col-xs-12'],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'menu_status',
             'type' => 'Zend\Form\Element\Select',
             'attributes' => [

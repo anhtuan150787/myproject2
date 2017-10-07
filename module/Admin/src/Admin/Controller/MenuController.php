@@ -29,9 +29,10 @@ class MenuController extends MasterController
 
         $this->data['records'] = $this->model->getMenus();
         $this->data['status']  = $this->status;
+        $this->data['countTable']   = $this->countTable();
 
         $this->viewName = 'admin/' . $this->module . '/index.phtml';
-        $this->view->setTemplate('partial/table_normal.phtml');
+        $this->viewTemplate = 'partial/table_normal.phtml';
 
         return $this->viewModel();
     }
@@ -48,19 +49,19 @@ class MenuController extends MasterController
             $this->form->setInputFilter($this->model->getInputFilter());
             $this->form->setData($dataPost);
 
-            if ($this->form->isValid()) {
+            if ($this->formIsValid()) {
 
                 $this->save();
 
                 $this->flashMessenger()->addMessage('Thêm mới thành công', 'msgInfo');
-                $this->redirect()->toRoute('admin/default', ['controller' => 'menu', 'action' => 'add']);
+                $this->redirect()->toRoute('admin/default', ['controller' => $this->module, 'action' => 'add']);
             }
         }
 
         $this->setFormSelectOptions();
 
         $this->viewName = 'admin/' . $this->module . '/form.phtml';
-        $this->view->setTemplate('partial/form_normal.phtml');
+        $this->viewTemplate = 'partial/form_normal.phtml';
 
         return $this->viewModel();
     }
@@ -72,7 +73,7 @@ class MenuController extends MasterController
         $this->init();
 
         $id = $this->params()->fromQuery('id');
-        $record = $this->model->getMenu(array('menu_id' => $id));
+        $record = $this->model->fetchPrimary($id);
 
         if ($this->getRequest()->isPost()) {
 
@@ -80,12 +81,12 @@ class MenuController extends MasterController
             $this->form->setInputFilter($this->model->getInputFilter());
             $this->form->setData($dataPost);
 
-            if ($this->form->isValid()) {
+            if ($this->formIsValid()) {
 
                 $this->save($id);
 
                 $this->flashMessenger()->addMessage('Cập nhật thành công', 'msgInfo');
-                $this->redirect()->toRoute('admin/default', ['controller' => 'menu', 'action' => 'edit'], ['query' => ['id' => $id]]);
+                $this->redirect()->toRoute('admin/default', ['controller' => $this->module, 'action' => 'edit'], ['query' => ['id' => $id]]);
             }
         }
 
@@ -95,7 +96,7 @@ class MenuController extends MasterController
         $this->form->setData($record);
 
         $this->viewName = 'admin/' . $this->module . '/form.phtml';
-        $this->view->setTemplate('partial/form_normal.phtml');
+        $this->viewTemplate = 'partial/form_normal.phtml';
 
         return $this->viewModel();
     }
@@ -109,8 +110,9 @@ class MenuController extends MasterController
         $dataSave['menu_parent']    = $paramPosts['menu_parent'];
         $dataSave['menu_status']    = $paramPosts['menu_status'];
         $dataSave['menu_url']       = $paramPosts['menu_url'];
+        $dataSave['menu_icon']      = $paramPosts['menu_icon'];
 
-        $this->model->save($dataSave, $id);
+        $this->model->savePrimary($dataSave, $id);
     }
 
     public function deleteAction()
@@ -125,12 +127,12 @@ class MenuController extends MasterController
 
         if (is_array($id)) {
             foreach($id as $k => $v) {
-                $this->model->delete(['menu_id' => $v]);
+                $this->model->deletePrimary($v);
             }
         }
 
         $this->flashMessenger()->addMessage('Xóa thành công', 'msgInfo');
-        $this->redirect()->toRoute('admin/default', ['controller' => 'menu', 'action' => 'index']);
+        $this->redirect()->toRoute('admin/default', ['controller' => $this->module, 'action' => 'index']);
 
         return $this->response();
     }

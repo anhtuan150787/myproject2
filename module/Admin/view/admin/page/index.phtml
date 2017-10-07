@@ -1,0 +1,23 @@
+<?php
+$columnName = [
+    'Tiêu đề',
+    'Lượt xem',
+    'Ngày cập nhật',
+    'Trạng thái',
+];
+
+foreach ($data['data'] as $record) {
+
+    $columnData[$record['post_id']] = [
+        '<a href="' . $this->url('admin/default', array('controller' => $module, 'action' => 'edit'), array('query' => array('id' => $record['post_id']))) . '">' . ' <strong>' . $this->escapeHtml($record['post_title']) . '</strong>' . '</a>',
+        $record['post_view'],
+        $this->date()->dateTimeFormat($record['post_date_updated']),
+        $data['status'][$record['post_status']],
+    ];
+}
+?>
+<?php echo $this->partial('admin/page/search_form', ['data' => $data]); ?>
+<table class="table table-striped jambo_table bulk_action">
+    <?php echo $this->partial('admin/partial/table_column_name', ['columnName' => $columnName]); ?>
+    <?php echo $this->partial('admin/partial/table_column_data', ['columnData' => $columnData, 'module' => $module]); ?>
+</table>

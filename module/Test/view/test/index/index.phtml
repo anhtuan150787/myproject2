@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CMS Version 2.0</title>
+</head>
+
+<body class="nav-md">
+
+<?php echo $this->inlineScript()
+    ->prependFile($this->basePath('admin/js/scripts.js'))
+    ->prependFile($this->basePath('admin/build/js/custom.min.js'))
+
+    ->prependFile($this->basePath('admin/vendors/tinymce/tinymce.min.js'))
+
+    ->prependFile($this->basePath('admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js'))
+
+    ->prependFile($this->basePath('admin/vendors/validator/validator-lang.js'))
+    ->prependFile($this->basePath('admin/vendors/validator/validator.js'))
+
+    ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.nonblock.js'))
+    ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.buttons.js'))
+    ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.js'))
+
+    ->prependFile($this->basePath('admin/vendors/bootstrap-daterangepicker/daterangepicker.js'))
+    ->prependFile($this->basePath('admin/vendors/moment/min/moment.min.js'))
+
+    ->prependFile($this->basePath('admin/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js'))
+    ->prependFile($this->basePath('admin/vendors/jqvmap/dist/maps/jquery.vmap.world.js'))
+    ->prependFile($this->basePath('admin/vendors/jqvmap/dist/jquery.vmap.js'))
+
+    ->prependFile($this->basePath('admin/vendors/DateJS/build/date.js'))
+    ->prependFile($this->basePath('admin/vendors/flot.curvedlines/curvedLines.js'))
+    ->prependFile($this->basePath('admin/vendors/flot-spline/js/jquery.flot.spline.min.js'))
+    ->prependFile($this->basePath('admin/vendors/flot.orderbars/js/jquery.flot.orderBars.js'))
+
+    ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.resize.js'))
+    ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.stack.js'))
+    ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.time.js'))
+    ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.pie.js'))
+    ->prependFile($this->basePath('admin/vendors/Flot/jquery.flot.js'))
+
+    ->prependFile($this->basePath('admin/vendors/skycons/skycons.js'))
+    ->prependFile($this->basePath('admin/vendors/iCheck/icheck.min.js'))
+
+    ->prependFile($this->basePath('admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'))
+    ->prependFile($this->basePath('admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'))
+
+    ->prependFile($this->basePath('admin/vendors/gauge.js/dist/gauge.min.js'))
+    ->prependFile($this->basePath('admin/vendors/Chart.js/dist/Chart.min.js'))
+    ->prependFile($this->basePath('admin/vendors/nprogress/nprogress.js'))
+    ->prependFile($this->basePath('admin/vendors/fastclick/lib/fastclick.js'))
+    ->prependFile($this->basePath('admin/vendors/bootstrap/dist/js/bootstrap.min.js'))
+    ->prependFile($this->basePath('admin/vendors/jquery/dist/jquery.min.js'))
+; ?>
+
+<script>
+    <?php if (!isset($_GET['action'])) {?>
+    $(document).ready(function(){
+        for(var i=0; i<=50; i++) {
+            window.open('<?php echo $this->url('test/default', ['controller' => 'index'], ['query' => ['action' => 'do']]);?>', '_blank');
+        }
+    })
+    <?php }?>
+</script>
+
+</body>
+</html>

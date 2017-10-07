@@ -1,0 +1,26 @@
+<?php
+if (empty($record)) {
+    $form->get('users_password')->setAttributes(['required' => 'required']);
+    $form->get('users_password_confirm')->setAttributes(['required' => 'required']);
+} else {
+    $form->get('users_email')->setAttributes(['disabled' => 'disabled']);
+    $form->get('users_password')->setAttributes(['placeholder' => '********']);
+    $form->get('users_password_confirm')->setAttributes(['placeholder' => '********']);
+}
+?>
+<?php
+echo $this->formViewElement()->input($form->get('group_users_id'));
+echo $this->formViewElement()->input($form->get('users_fullname'));
+echo $this->formViewElement()->input($form->get('users_email'));
+echo $this->formViewElement()->input($form->get('users_password'));
+echo $this->formViewElement()->input($form->get('users_password_confirm'));
+echo $this->formViewElement()->input($form->get('users_phone'));
+echo $this->formViewElement()->input($form->get('users_status'));
+echo $this->formViewElement()->picture($form->get('users_picture'), $module, $record, 'pictures/users/', 'users_id');
+
+if (!empty($record)) {
+    echo $this->formViewElement()->text('Ngày đăng ký', $this->date()->dateTimeFormat($record['users_registered']));
+    echo $this->formViewElement()->text('Thời gian đăng nhập', $this->date()->dateTimeFormat($record['users_login_time']));
+    echo $this->formViewElement()->text('User Agent', $record['users_user_agent']);
+}
+?>

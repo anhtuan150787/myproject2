@@ -46,7 +46,7 @@
                         if ($user->users_picture == '') {
                             echo '<img src="' . $this->basePath('admin/images/no-picture-person.png') . '" class="img-circle profile_img" />';
                         } else {
-                            echo '<img src="' . $this->basePath('admin/pictures/users/' . $user->users_picture) .'" class="img-circle profile_img">';
+                            echo '<img src="' . $this->basePath('pictures/users/' . $user->users_picture) .'" class="img-circle profile_img">';
                         }
                         ?>
                     </div>
@@ -61,44 +61,78 @@
 
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+<!--                    <div class="menu_section">-->
+<!--                        <h3>Chức năng</h3>-->
+<!--                        <ul class="nav side-menu">-->
+<!--                            <li><a href="--><?php //echo $this->url('admin');?><!--"><i class="fa fa-home"></i> Trang chủ </a>-->
+<!--                            </li>-->
+<!--                            <li><a><i class="fa fa-edit"></i> Bài viết <span class="fa fa-chevron-down"></span></a>-->
+<!--                                <ul class="nav child_menu">-->
+<!--                                    <li><a href="form.html">Danh sách</a></li>-->
+<!--                                    <li><a href="form_advanced.html">Tạo mới</a></li>-->
+<!--                                    <li><a href="form_validation.html">Danh mục</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+
+
+                    <?php foreach ($menu as $v) : ?>
                     <div class="menu_section">
-                        <h3>Chức năng</h3>
-                        <ul class="nav side-menu">
-                            <li><a href="<?php echo $this->url('admin');?>"><i class="fa fa-home"></i> Trang chủ </a>
-                            </li>
-                            <li><a><i class="fa fa-edit"></i> Bài viết <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="form.html">Danh sách</a></li>
-                                    <li><a href="form_advanced.html">Tạo mới</a></li>
-                                    <li><a href="form_validation.html">Danh mục</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <?php if ($v['menu_parent'] == 0) : ?>
+                            <?php $sub1 = false; $s1 = ''; ?>
+
+                            <h3><?php echo $v['menu_name']; ?></h3>
+
+                            <?php
+                            foreach ($menu as $vv) {
+                                if ($vv['menu_parent'] == $v['menu_id']) {
+                                    $sub2 = false; $s2 = '';
+                                    $sub1 = true;
+
+                                    foreach ($menu as $vvv) {
+                                        if ($vvv['menu_parent'] == $vv['menu_id']) {
+                                            $sub2 = true;
+                                            $s2 .= '<li><a href="' . (($vvv['menu_url'] != '') ? $this->serverUrl('/' . $vvv['menu_url']) : 'javascript:void(0)') . '">' . $vvv['menu_name'] . '</a></li>';
+                                        }
+                                    }
+
+                                    $s1 .= '<li>';
+                                    $s1 .=  '<a href="' . (($vv['menu_url'] != '') ? $this->serverUrl('/' . $vv['menu_url']) : 'javascript:void(0)') . '">';
+                                    $s1 .=  '<i class="' . $vv['menu_icon'] . '"></i> ' . $vv['menu_name'];
+                                    if ($sub2 == true) {
+                                        $s1 .= '<span class="fa fa-chevron-down"></span>';
+                                    }
+                                    $s1 .=  '</a>';
+
+                                    if ($sub2 == true) {
+                                        $s1 .= '<ul class="nav child_menu">' . $s2 . '</ul>';
+                                    }
+
+                                    $s1 .= '</li>';
+                                }
+                            }
+                            ?>
+
+                            <?php
+                            if ($sub1 ==  true) {
+                                echo '<ul class="nav side-menu">' . $s1 . '</ul>';
+                            }
+                            ?>
+
+<!--                        <ul class="nav side-menu">-->
+<!--                            <li><a><i class="fa fa-sitemap"></i> Menu <span class="fa fa-chevron-down"></span></a>-->
+<!--                                <ul class="nav child_menu">-->
+<!--                                    <li><a href="--><?php //echo $this->url('admin/default', ['controller' => 'menu', 'action' => 'index']);?><!--">Danh sách</a></li>-->
+<!--                                    <li><a href="--><?php //echo $this->url('admin/default', ['controller' => 'menu', 'action' => 'add']);?><!--">Thêm mới</a></li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!---->
+<!--                        </ul>-->
+
+                        <?php endif;?>
                     </div>
-                    <div class="menu_section">
-                        <h3>Hệ thống</h3>
-                        <ul class="nav side-menu">
-                            <li><a><i class="fa fa-sitemap"></i> Menu <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="<?php echo $this->url('admin/default', ['controller' => 'menu', 'action' => 'index']);?>">Danh sách</a></li>
-                                    <li><a href="<?php echo $this->url('admin/default', ['controller' => 'menu', 'action' => 'add']);?>">Thêm mới</a></li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-lock"></i> Quyền <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="#level1_1">Danh sách</a></li>
-                                    <li><a href="#level1_2">Thêm mới</a></li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="#level1_1">Danh sách</a></li>
-                                    <li><a href="#level1_2">Thêm mới</a></li>
-                                    <li><a href="#level1_2">Nhóm</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    <?php endforeach;?>
 
                 </div>
                 <!-- /sidebar menu -->
@@ -137,14 +171,14 @@
                                 if ($user->users_picture == '') {
                                     echo '<img src="' . $this->basePath('admin/images/no-picture-person.png') . '" />';
                                 } else {
-                                    echo '<img src="' . $this->basePath('admin/pictures/users/' . $user->users_picture) .'">';
+                                    echo '<img src="' . $this->basePath('pictures/users/' . $user->users_picture) .'">';
                                 }
                                 ?>
                                 <?php echo $user->users_fullname;?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:;"> Cập nhật</a></li>
+                                <li><a href="<?php echo $this->url('admin/default', ['controller' => 'user', 'action' => 'edit'], ['query' => ['id' => $user->users_id]]);?>"> Cập nhật</a></li>
                                 <li><a href="<?php echo $this->url('admin/default', array('controller' => 'logout', 'action' => 'index'));?>"><i class="fa fa-sign-out pull-right"></i> Thoát</a></li>
                             </ul>
                         </li>
@@ -158,8 +192,12 @@
         <div class="right_col" role="main">
 
             <?php echo $this->inlineScript()
-                ->prependFile($this->basePath('admin/js/scripts.js'))
+                ->prependFile($this->basePath('admin/js/scripts.js?v='.date('His')))
                 ->prependFile($this->basePath('admin/build/js/custom.min.js'))
+
+                ->prependFile($this->basePath('admin/vendors/tinymce/tinymce.min.js'))
+
+                ->prependFile($this->basePath('admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js'))
 
                 ->prependFile($this->basePath('admin/vendors/validator/validator-lang.js'))
                 ->prependFile($this->basePath('admin/vendors/validator/validator.js'))
@@ -200,6 +238,49 @@
                 ->prependFile($this->basePath('admin/vendors/jquery/dist/jquery.min.js'))
             ; ?>
 
+
+            <!-- Tinymce -->
+            <script>
+                var tinymce_filemanager_path = '<?php echo $this->basePath('admin/vendors/tinymce/filemanager/');?>';
+
+                $(document).ready(function(){
+                    /*
+                     *  Tinymce
+                     */
+                    if ($(".description").length)
+                    {
+                        tinymce.init({
+                            selector: "textarea.description", theme: "modern", height: 200,
+                            toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+                        });
+                    }
+
+                    if ($(".content").length)
+                    {
+                        tinymce.init({
+                            selector: "textarea.content", theme: "modern", height: 200,
+                            font_size_style_values: ["6px,7px,8px,9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px,26px,27px,28px,29px,30px,31px,32px,36px,38px,40px"],
+                            relative_urls: false,
+                            plugins: [
+                                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                                "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                                "table contextmenu directionality emoticons paste textcolor responsivefilemanager code",
+                                "textcolor"
+                            ],
+
+                            toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+                            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code | fontsizeselect",
+                            image_advtab: true,
+                            external_filemanager_path: tinymce_filemanager_path,
+                            filemanager_title: "Responsive Filemanager",
+                            external_plugins: {"filemanager": tinymce_filemanager_path + "plugin.min.js"},
+                            filemanager_access_key: '<?php echo sha1(md5(strtotime(date('Y-m-d'))));?>'
+                        });
+                    }
+                });
+            </script>
+            <!-- End Tinymce -->
+
             <?php echo $this->content;?>
         </div>
         <!-- /page content -->
@@ -207,7 +288,7 @@
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                CMS Version 2.0
             </div>
             <div class="clearfix"></div>
         </footer>

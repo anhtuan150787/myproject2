@@ -16,6 +16,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\MvcEvent;
 
+
 class ForgetController extends AbstractActionController
 {
     private $msgError;
@@ -36,8 +37,8 @@ class ForgetController extends AbstractActionController
 
         $userModel      = $this->getServiceLocator()->get('ModelGateway')->getModel('UserModel');
         $forgetModel    = $this->getServiceLocator()->get('ModelGateway')->getModel('ForgetModel');
-        $sendMail       = $this->getServiceLocator()->get('send_mail');
-        $encrypt        = $this->getServiceLocator()->get('encrypt');
+        $sendMail       = $this->getServiceLocator()->get('SendMail');
+        $encrypt        = $this->getServiceLocator()->get('Encrypt');
 
         $authService = new AuthenticationService();
 
@@ -76,17 +77,24 @@ class ForgetController extends AbstractActionController
                     );
                     $urlGetNewPassword = 'http://' . $_SERVER['SERVER_NAME'] . $urlGetNewPassword;
 
-                    $userModel->save(array('users_forget_request_key' => $keyRequestNewPassword), $userInfoByEmail['users_id']);
+                    $userModel->savePrimary(array('users_forget_request_key' => $keyRequestNewPassword), $userInfoByEmail['users_id']);
 
-                    $sendMail->setTo($email);
-                    $sendMail->setSubject('[CMS LOGIN] Lấy lại mật khẩu');
-                    $sendMail->setBody('Nhấn vào đây để thiết lập lại Mật khẩu mới: ' . $urlGetNewPassword);
-                    $sendMail->send();
+                    try {
+                        $sendMail->setTo($email);
+                        $sendMail->setSubject('[CMS LOGIN] Lấy lại mật khẩu');
+                        $sendMail->setBody('Nhấn vào đây để thiết lập lại Mật khẩu mới: ' . $urlGetNewPassword);
+                        $sendMail->send();
+                    } catch (\Exception $e) {
+                        $writer = $this->getServiceLocator()->get('Writer');
+                        $writer->write('SEND MAIL ERROR: ' . $e->getMessage(), 'ERR');
+                    }
 
                     $this->msgInfoLine = 'Yêu cầu lấy lại mật khẩu đã được gửi đến Email: ' . $email;
                 } else {
                     $this->msgError = 'Email không tồn tại trong hệ thống hoặc đã bị khóa';
                 }
+            } else {
+                $this->msgError = current(current($forgetForm->getMessages()));
             }
         }
 
@@ -108,7 +116,7 @@ class ForgetController extends AbstractActionController
 
         $view = new ViewModel();
 
-        $encrypt            = $this->getServiceLocator()->get('encrypt');
+        $encrypt            = $this->getServiceLocator()->get('Encrypt');
         $forgetConfirmModel = $this->getServiceLocator()->get('ModelGateway')->getModel('ForgetConfirmModel');
         $userModel          = $this->getServiceLocator()->get('ModelGateway')->getModel('UserModel');
 
@@ -133,10 +141,10 @@ class ForgetController extends AbstractActionController
                         $saltHash = $encrypt->HashSalt($password);
                         $newPasswordHash = $encrypt->HashPass($password, $saltHash);
 
-                        $userModel->save(array(
+                        $userModel->savePrimary(array(
                             'users_password'            => $newPasswordHash,
                             'users_salt'                => $saltHash,
-                            'users_forget_request_key'  => ''
+                            'users_forget_request_key'  => '',
                         ), $userInfoByEmail['users_id']);
 
                         $this->msgInfoLine = 'Đặt lại Mật khẩu thành công. Đang chuyển sang đăng nhập...';
@@ -149,6 +157,8 @@ class ForgetController extends AbstractActionController
                 } else {
                     $this->msgErrorLine = 'Email không tồn tại trong hệ thống hoặc đã bị khóa';
                 }
+            } else {
+                $this->msgError = current(current($forgetConfirmForm->getMessages()));
             }
         }
 

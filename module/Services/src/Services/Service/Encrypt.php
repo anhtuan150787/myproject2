@@ -4,7 +4,13 @@ namespace Services\Service;
 
 class Encrypt
 {
-    private $key = 'konokoshino2002';
+    private $key;
+
+    public function __construct()
+    {
+        $config = include 'config/encrypt.php';
+        $this->key = $config['key'];
+    }
 
     public function HashPass($pass, $salt)
     {

@@ -31,7 +31,7 @@ class Module
             /*
              * Write log exception
              */
-            $writer = $e->getApplication()->getServiceManager()->get('writer');
+            $writer = $e->getApplication()->getServiceManager()->get('Writer');
 
             $errorMsg = [];
 

@@ -73,7 +73,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Captcha' => 'Application\Controller\CaptchaController'
         ),
     ),
     'view_manager' => array(
@@ -91,6 +92,9 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+        'strategies' => [
+            'ViewJsonStrategy',
+        ],
     ),
     // Placeholder for console routes
     'console' => array(

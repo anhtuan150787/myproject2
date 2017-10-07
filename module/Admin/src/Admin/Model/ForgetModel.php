@@ -4,6 +4,8 @@ namespace Admin\Model;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\NotEmpty;
+use Zend\Validator\EmailAddress;
 
 class ForgetModel extends MasterModel implements InputFilterAwareInterface
 {
@@ -38,7 +40,7 @@ class ForgetModel extends MasterModel implements InputFilterAwareInterface
                         'name' => 'not_empty',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Vui lòng nhập Email',
+                                NotEmpty::IS_EMPTY => 'Vui lòng nhập Email',
                             ]
                         ],
                         'break_chain_on_failure' => true,
@@ -47,7 +49,7 @@ class ForgetModel extends MasterModel implements InputFilterAwareInterface
                         'name' => 'EmailAddress',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\EmailAddress::INVALID_FORMAT => 'Email không đúng định dạng',
+                                EmailAddress::INVALID_FORMAT => 'Email không đúng định dạng',
                             ]
                         ]
                     ],

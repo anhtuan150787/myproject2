@@ -9,6 +9,7 @@
 
 namespace Services;
 
+use Admin\Model\ModelGateway;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -33,6 +34,17 @@ class Module
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
+            ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'ModelGateway' => function($sm) {
+                    return new ModelGateway($sm);
+                }
             ),
         );
     }

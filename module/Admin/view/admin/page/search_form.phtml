@@ -1,0 +1,24 @@
+<?php
+$data['formSearch']->setAttributes(['action' => '', 'id' => 'frm-search', 'novalidate' => '']);
+$data['formSearch']->prepare();
+echo $this->form()->openTag($data['formSearch']);
+?>
+<div class="col-md-8 center-margin">
+<table class="table table-striped jambo_table bulk_action">
+    <tr>
+        <td>
+            <div class="col-md-12">
+                    <div class="form-group">
+                        <?php echo $this->formLabel($data['formSearch']->get('post_title_search')); ?>
+                        <?php echo $this->formElement($data['formSearch']->get('post_title_search')); ?>
+                    </div>
+
+            </div>
+            <div class="col-md-12 text-right">
+                <?php echo $this->formSubmit($data['formSearch']->get('frmSubmit')); ?>
+            </div>
+        </td>
+    </tr>
+</table>
+<?php echo $this->form()->closeTag(); ?>
+</div>

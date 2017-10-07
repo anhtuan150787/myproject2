@@ -5,6 +5,9 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
+use Zend\Validator\NotEmpty;
+use Zend\Validator\EmailAddress;
+
 class ForgetConfirmModel extends MasterModel implements InputFilterAwareInterface
 {
     protected $inputFilter;
@@ -37,7 +40,7 @@ class ForgetConfirmModel extends MasterModel implements InputFilterAwareInterfac
                         'name' => 'not_empty',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Vui lòng nhập Mật khẩu',
+                                NotEmpty::IS_EMPTY => 'Vui lòng nhập Mật khẩu',
                             ]
                         ],
                         'break_chain_on_failure' => true,
@@ -56,7 +59,7 @@ class ForgetConfirmModel extends MasterModel implements InputFilterAwareInterfac
                         'name' => 'not_empty',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Vui lòng xác nhận lại Mật khẩu',
+                                NotEmpty::IS_EMPTY => 'Vui lòng xác nhận lại Mật khẩu',
                             ]
                         ],
                         'break_chain_on_failure' => true,

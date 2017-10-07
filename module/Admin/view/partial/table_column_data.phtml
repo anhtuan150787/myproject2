@@ -1,0 +1,11 @@
+<tbody>
+<?php foreach ($columnData as $k => $v) { ?>
+    <tr class="even pointer">
+        <td><input type="checkbox" class="checkbox_item" name="check_item[]" value="<?php echo $k;?>"/></td>
+        <?php foreach ($v as $kk => $vv) { ?>
+        <td><?php echo $vv;?></td>
+        <?php }?>
+        <td><?php echo $this->partial('admin/partial/table_column_action', ['module' => $module, 'id' => $k]);?></td>
+    </tr>
+<?php } ?>
+</tbody>

@@ -1,0 +1,5 @@
+<?php if ($data['paginator'] == true) {?>
+    <div class="col-sm-12">
+        <?php echo $this->paginationControl($data['records'], 'sliding', 'admin/partial/paginator', array('url' => $this->url('admin/default', ['controller' => $module, 'action' => 'index']))); ?>
+    </div>
+<?php }?>

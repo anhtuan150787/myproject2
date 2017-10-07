@@ -1,0 +1,18 @@
+<?php
+$columnName = [
+    'Danh mục',
+    'Trạng thái',
+];
+
+foreach ($data['records'] as $record) {
+    $columnData[$record['post_category_id']] = [
+        '<a href="' . $this->url('admin/default', array('controller' => $module, 'action' => 'edit'), array('query' => array('id' => $record['post_category_id']))) . '">' . str_repeat('__', $record['post_category_level']) . ' <strong>' . $record['post_category_name'] . '</strong>' . '</a>',
+        $data['status'][$record['post_category_status']],
+    ];
+}
+?>
+
+<table class="table table-striped jambo_table bulk_action">
+    <?php echo $this->partial('admin/partial/table_column_name', ['columnName' => $columnName]); ?>
+    <?php echo $this->partial('admin/partial/table_column_data', ['columnData' => $columnData, 'module' => $module]); ?>
+</table>

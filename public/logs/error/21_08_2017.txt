@@ -1,0 +1,34 @@
+2017-08-21T15:27:43+07:00 ERR (3): error-exception	127.0.0.1	Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36	http://zend2/admin/website-general/edit	GET	http://zend2/admin/website-email/edit	"./public/logs/info/21_08_2017.txt" cannot be opened with mode "a"
+#0 D:\www\zend2\module\Services\src\Services\Service\Writer.php(33): Zend\Log\Writer\Stream->__construct('./public/logs/i...')
+#1 D:\www\zend2\module\Admin\src\Admin\Controller\WebsiteEmailController.php(42): Services\Service\Writer->write('A connection at...')
+#2 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(82): Admin\Controller\WebsiteEmailController->editAction()
+#3 D:\www\zend2\module\Admin\src\Admin\Controller\MasterController.php(79): Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#4 [internal function]: Admin\Controller\MasterController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#5 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(444): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#6 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(205): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#7 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(118): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#8 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(93): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#9 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#10 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(444): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#11 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(205): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#12 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(314): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#13 D:\www\zend2\public\index.php(17): Zend\Mvc\Application->run()
+#14 {main}
+2017-08-21T15:30:12+07:00 ERR (3): error-exception	127.0.0.1	Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36	http://zend2/admin/website-general/edit	GET	http://zend2/admin/website-email/edit	"./public/logs/info/21_08_2017.txt" cannot be opened with mode "a"
+#0 D:\www\zend2\module\Services\src\Services\Service\Writer.php(33): Zend\Log\Writer\Stream->__construct('./public/logs/i...')
+#1 D:\www\zend2\module\Admin\src\Admin\Controller\WebsiteEmailController.php(42): Services\Service\Writer->write('A connection at...')
+#2 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(82): Admin\Controller\WebsiteEmailController->editAction()
+#3 D:\www\zend2\module\Admin\src\Admin\Controller\MasterController.php(79): Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#4 [internal function]: Admin\Controller\MasterController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#5 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(444): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#6 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(205): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#7 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(118): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#8 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(93): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#9 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#10 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(444): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#11 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(205): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#12 D:\www\zend2\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(314): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#13 D:\www\zend2\public\index.php(17): Zend\Mvc\Application->run()
+#14 {main}
+2017-08-21T15:32:04+07:00 ERR (3): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+

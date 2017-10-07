@@ -1,0 +1,61 @@
+<div class="item form-group">
+    <?php echo $this->formLabel($formElement); ?>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="fileupload" data-provides="fileupload">
+            <div class="fileupload-new">
+                <?php if (isset($record) && $record[$formElement->getName()] != '') { ?>
+                    <img title="Click để xóa" class="picture_upload_view avatar-picture" id="picture" onclick="deletePicture(<?php echo $record[$primary]; ?>)"
+                         style="cursor: pointer"
+                         src="<?php echo $this->basePath($url . $record[$formElement->getName()]); ?>"/>
+                <?php } else { ?>
+                    <img style="cursor: pointer" title="Click để xóa" onclick="deleteURL()" class="picture_upload_view avatar-picture" src="<?php echo $this->basePath('admin/images/no-image.gif'); ?>"/>
+                <?php } ?>
+            </div>
+
+            <span class="btn btn-file">
+                <span class="btn-fileupload">Chọn hình</span>
+                <?php echo $this->formElement($formElement); ?>
+            </span>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var no_image = '<?php echo $this->basePath('admin/images/no-image.gif'); ?>';
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.picture_upload_view')
+                    .attr('src', e.target.result)
+                    .width(50)
+                    .height(50);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function deleteURL() {
+        $('input[type="file"]').val('');
+        $('.picture_upload_view').attr('src', no_image);
+    }
+
+    function deletePicture(id) {
+        if (confirm('Bạn có muốn xóa?')) {
+            $.ajax({
+                url: '<?php echo $this->url('admin/default', array('controller' => $module, 'action' => 'delete-picture'));?>',
+                type: 'post',
+                data: {id: id, field: '<?php echo $formElement->getName();?>', url: '<?php echo $url;?>'},
+                success: function (response) {
+                    data = jQuery.parseJSON(response);
+                    if (data.return == 1) {
+                        $('#picture').attr('src', no_image);
+                    }
+                }
+            });
+        }
+    }
+</script>

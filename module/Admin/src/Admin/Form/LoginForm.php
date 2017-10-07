@@ -2,7 +2,8 @@
 namespace Admin\Form;
 
 use Zend\Form\Form;
-
+use Zend\Form\Element\Captcha;
+use Zend\Captcha\Image as CaptchaImage;
 
 class LoginForm extends Form
 {
@@ -27,6 +28,23 @@ class LoginForm extends Form
             'attributes' => [
                 'placeholder' => 'Mật khẩu',
                 'class' => 'form-control',
+                'required' => 'required',
+            ],
+        ));
+
+        $configCaptcha = include 'config/captcha.php';
+
+        $captchaImage = new CaptchaImage($configCaptcha);
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Captcha',
+            'name' => 'Captcha',
+            'options' => [
+                'captcha' => $captchaImage,
+            ],
+            'attributes' => [
+                'placeholder' => 'Mã xác thực',
+                'class' => 'form-control captcha-input',
                 'required' => 'required',
             ],
         ));

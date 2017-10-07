@@ -2,7 +2,8 @@
 namespace Admin\Form;
 
 use Zend\Form\Form;
-
+use Zend\Form\Element\Captcha;
+use Zend\Captcha\Image as CaptchaImage;
 
 class ForgetConfirmForm extends Form
 {
@@ -28,6 +29,23 @@ class ForgetConfirmForm extends Form
                 'class' => 'form-control',
                 'required' => 'required',
                 'data-validate-linked' => 'users_password',
+            ],
+        ));
+
+        $configCaptcha = include 'config/captcha.php';
+
+        $captchaImage = new CaptchaImage($configCaptcha);
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Captcha',
+            'name' => 'Captcha',
+            'options' => [
+                'captcha' => $captchaImage,
+            ],
+            'attributes' => [
+                'placeholder' => 'Mã xác thực',
+                'class' => 'form-control captcha-input',
+                'required' => 'required',
             ],
         ));
 

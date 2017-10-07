@@ -21,6 +21,11 @@ class LogoutController extends AbstractActionController
         $user = $auth->getIdentity();
         $auth->clearIdentity();
 
+        $cache = $this->getServiceLocator()->get('Cache');
+        $cache->setNameSpace('group_acl')->clearByNameSpace();
+        $cache->setNameSpace('group_menu')->clearByNameSpace();
+
         $this->redirect()->toRoute('admin/default', array('controller' => 'login', 'action' => 'index'));
+        return $this->response;
     }
 }

@@ -39,7 +39,7 @@ class LoginController extends AbstractActionController
         $userModel  = $this->getServiceLocator()->get('ModelGateway')->getModel('UserModel');
         $loginModel = $this->getServiceLocator()->get('ModelGateway')->getModel('LoginModel');
         $dbAdapter  = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $encrypt    = $this->getServiceLocator()->get('encrypt');
+        $encrypt    = $this->getServiceLocator()->get('Encrypt');
 
         $authService = new AuthenticationService();
         $loginForm   = new LoginForm();
@@ -73,7 +73,12 @@ class LoginController extends AbstractActionController
 
                 if ($isValid) {
 
-                    $userModel->save(array('users_login_time' => date('Y-m-d H:i:s')), $userInfoByEmail['users_id']);
+                    $userModel->savePrimary([
+                        'users_login_time' => date('Y-m-d H:i:s'),
+                        'users_user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                        'users_forget_request_key' => '',
+
+                    ], $userInfoByEmail['users_id']);
 
                     $storage = new Session();
                     $storage->write($authAdapter->getResultRowObject([
@@ -91,6 +96,8 @@ class LoginController extends AbstractActionController
                 } else {
                     $this->msgError = 'Thông tin đăng nhập không đúng hoặc tài khoản đã bị khóa';
                 }
+            } else {
+                $this->msgError = current(current($loginForm->getMessages()));
             }
         }
 

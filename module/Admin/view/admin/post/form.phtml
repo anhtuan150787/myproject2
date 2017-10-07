@@ -1,0 +1,12 @@
+<div class="col-sm-8" style="border-right: 1px solid #DDD">
+    <?php echo $this->formViewElement()->input2($form->get('post_title'));?>
+    <?php echo $this->formViewElement()->textarea($form->get('post_quote'));?>
+    <?php echo $this->formViewElement()->textarea($form->get('post_body')); ?>
+</div>
+
+<div class="col-sm-4">
+    <?php echo $this->formViewElement()->picture($form->get('post_picture'), $module, $record, 'pictures/posts/', 'post_id');?>
+    <?php echo $this->formViewElement()->checkbox($form->get('post_category_id'));?>
+    <?php echo $this->formViewElement()->input($form->get('post_tag'));?>
+    <?php echo $this->formViewElement()->input($form->get('post_status'));?>
+</div>

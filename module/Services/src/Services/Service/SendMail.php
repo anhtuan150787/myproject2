@@ -15,28 +15,50 @@ class SendMail  {
     private $body;
     private $toSecond;
     private $fromName;
+    private $configs;
 
-    public function send() {
-        $config = include 'config/mailer.php';
+    public function __construct($sm)
+    {
+        $websiteEmailModel = $sm->get('ModelGateway')->getModel('WebsiteEmailModel');
+        $websiteEmail = $websiteEmailModel->fetchPrimary(1);
 
+        $this->configs = [
+            'system' => [
+                'name' => $websiteEmail['website_email_system_name'],
+                'host' => $websiteEmail['website_email_system_host'],
+                'port' => $websiteEmail['website_email_system_port'],
+                'connection_class' => 'login',
+                'connection_config' => [
+                    'username'  => $websiteEmail['website_email_system_username'],
+                    'password'  => $websiteEmail['website_email_system_password'],
+                    'ssl'       => $websiteEmail['website_email_system_ssl'],
+                ],
+            ],
+            'from' => $websiteEmail['website_email_from'],
+            'from_name' => $websiteEmail['website_email_from_name'],
+        ];
+
+        $this->setFrom($this->configs['from']);
+        $this->setFromName($this->configs['from_name']);
+    }
+
+    public function send()
+    {
         $html = new MimePart($this->body);
         $html->type = "text/html";
 
         $body = new MimeMessage();
         $body->setParts(array($html));
 
-        $this->from = $config['from'];
-        $this->fromName = $config['from_name'];
-
         $message = new Message();
         $message->addTo($this->to)
-            ->addFrom($this->from, $this->fromName)
-            ->setSubject($this->subject)
-            ->setBody($body)
-            ->setEncoding('UTF-8');
+                ->addFrom($this->from, $this->fromName)
+                ->setSubject($this->subject)
+                ->setBody($body)
+                ->setEncoding('UTF-8');
 
         $transport = new SmtpTransport();
-        $options   = new SmtpOptions($config['system']);
+        $options   = new SmtpOptions($this->configs['system']);
         $transport->setOptions($options);
         $transport->send($message);
     }
@@ -69,5 +91,9 @@ class SendMail  {
     public function setBody($body) {
         $this->body = $body;
         return $this;
+    }
+
+    public function setConfig($configs) {
+        $this->configs = $configs;
     }
 }

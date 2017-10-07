@@ -3,13 +3,15 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+            'SendMail' => function($sm) {
+                return new \Services\Service\SendMail($sm);
+            }
         ),
         'invokables' => array(
-            'upload_file'  => 'Services\Service\UploadFile',
-            'send_mail' => 'Services\Service\SendMail',
-            'encrypt' => 'Services\Service\Encrypt',
-            'cache' => 'Services\Service\Cache',
-            'writer' => 'Services\Service\Writer',
+            'UploadFile'   => 'Services\Service\UploadFile',
+            'Encrypt'       => 'Services\Service\Encrypt',
+            'Cache'         => 'Services\Service\Cache',
+            'Writer'        => 'Services\Service\Writer',
         )
     ),
 );

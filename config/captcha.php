@@ -1,11 +1,11 @@
 <?php
 return array(
-    'font' => './public/captcha/font/arial.ttf',
+    'font' => './public/pictures/captcha/font/arial.ttf',
     'width' => 140,
-    'height' => 50,
+    'height' => 40,
     'dotNoiseLevel' => 0,
     'lineNoiseLevel' => 3,
     'wordLen' => 6,
-    'imgDir' => './public/captcha/img',
-    'imgUrl' => '/captcha/img',
+    'imgDir' => './public/pictures/captcha/img',
+    'imgUrl' => '/pictures/captcha/img',
 );

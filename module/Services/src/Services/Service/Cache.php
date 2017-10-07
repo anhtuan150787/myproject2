@@ -7,24 +7,47 @@ class Cache  {
 
     private $cache;
     private $configs;
+    private $cacheType = 'file';
+    private $status = 'on';
 
     public function __construct() {
         $this->setConfigs();
     }
 
-    public function getCache() {
+    public function getCache()
+    {
         $this->cache = StorageFactory::factory($this->configs);
     }
 
-    public function setConfigs($configs = null) {
+    public function setConfigs($configs = null)
+    {
         if ($configs == null) {
+
             $config = include 'config/cache.php';
-            $cacheType = 'file';
+
+            $this->status = $config['status'];
+
+            $cacheType = $this->getCacheType();
+
             $this->configs = $config[$cacheType];
+
         } else {
             $this->configs = $configs;
         }
+
         return $this;
+    }
+
+    public function setCacheType($cacheType)
+    {
+        $this->cacheType = $cacheType;
+
+        return $this;
+    }
+
+    public function getCacheType()
+    {
+        return $this->cacheType;
     }
 
     public function getConfigs() {
@@ -44,6 +67,11 @@ class Cache  {
     }
 
     public function set($key, $value) {
+
+        if ($this->status == 'off') {
+            return;
+        }
+
         $this->getCache();
 
         if ($this->cache->hasItem($key)) {
@@ -56,6 +84,11 @@ class Cache  {
     }
 
     public function get($key) {
+
+        if ($this->status == 'off') {
+            return;
+        }
+
         $this->getCache();
 
         if ($this->cache->hasItem($key)) {

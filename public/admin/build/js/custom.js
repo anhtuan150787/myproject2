@@ -1729,7 +1729,7 @@ if (typeof NProgress != 'undefined') {
 	      
 			if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
 			console.log('init_daterangepicker_single_call');
-		   
+
 			$('#single_cal1').daterangepicker({
 			  singleDatePicker: true,
 			  singleClasses: "picker_1"
@@ -1754,8 +1754,8 @@ if (typeof NProgress != 'undefined') {
 			}, function(start, end, label) {
 			  console.log(start.toISOString(), end.toISOString(), label);
 			});
-  
-  
+
+
 		}
 		
 		 

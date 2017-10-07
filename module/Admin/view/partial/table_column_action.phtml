@@ -1,0 +1,5 @@
+
+
+<a href="<?php echo $this->url('admin/default', array('controller' => $module ,'action' => 'edit'), array('query' => array('id' => $id))); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Cập nhật </a>
+
+<a  href="javascript:void(0)" onclick="showConfirm('deleteItem', this)" data-href="<?php echo $this->url('admin/default', array('controller' => $module, 'action' => 'delete'), array('query' => array('id' => $id))); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Xóa </a>

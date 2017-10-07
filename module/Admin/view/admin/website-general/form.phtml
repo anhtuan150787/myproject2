@@ -1,0 +1,6 @@
+<?php
+echo $this->formViewElement()->input($form->get('website_general_title'));
+echo $this->formViewElement()->input($form->get('website_general_keyword'));
+echo $this->formViewElement()->input($form->get('website_general_description'));
+echo $this->formViewElement()->picture($form->get('website_general_favicon'), $module, $record, 'pictures/websites/', 'website_general_id');
+?>

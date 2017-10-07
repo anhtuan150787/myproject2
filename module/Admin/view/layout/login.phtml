@@ -21,27 +21,28 @@
         ->prependStylesheet($this->basePath('admin/vendors/bootstrap/dist/css/bootstrap.min.css'))
     ?>
 
-    <?php echo $this->headScript()
-        ->prependFile($this->basePath('admin/build/js/custom.min.js'))
-
-        ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.nonblock.js'))
-        ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.buttons.js'))
-        ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.js'))
-
-        ->prependFile($this->basePath('admin/vendors/validator/validator-lang.js'))
-        ->prependFile($this->basePath('admin/vendors/validator/validator.js'))
-
-        ->prependFile($this->basePath('admin/vendors/nprogress/nprogress.js'))
-        ->prependFile($this->basePath('admin/vendors/fastclick/lib/fastclick.js'))
-        ->prependFile($this->basePath('admin/vendors/bootstrap/dist/js/bootstrap.min.js'))
-        ->prependFile($this->basePath('admin/vendors/jquery/dist/jquery.min.js'))
-    ; ?>
-
 </head>
 
 <body class="login">
 <div>
     <div class="login_wrapper">
+        <?php echo $this->inlineScript()
+            ->prependFile($this->basePath('admin/js/scripts.js'))
+            ->prependFile($this->basePath('admin/build/js/custom.min.js'))
+
+            ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.nonblock.js'))
+            ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.buttons.js'))
+            ->prependFile($this->basePath('admin/vendors/pnotify/dist/pnotify.js'))
+
+            ->prependFile($this->basePath('admin/vendors/validator/validator-lang.js'))
+            ->prependFile($this->basePath('admin/vendors/validator/validator.js'))
+
+            ->prependFile($this->basePath('admin/vendors/nprogress/nprogress.js'))
+            ->prependFile($this->basePath('admin/vendors/fastclick/lib/fastclick.js'))
+            ->prependFile($this->basePath('admin/vendors/bootstrap/dist/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('admin/vendors/jquery/dist/jquery.min.js'))
+        ; ?>
+
         <?php echo $this->content;?>
     </div>
 </div>

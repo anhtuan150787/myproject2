@@ -1,0 +1,21 @@
+<?php
+$columnName = [
+    'Menu',
+    'Trạng thái',
+    'Tạo liên kết',
+];
+
+foreach ($data['records'] as $record) {
+    $columnData[$record['group_navigation_id']] = [
+        '<a href="' . $this->url('admin/default', array('controller' => $module, 'action' => 'edit'), array('query' => array('id' => $record['group_navigation_id']))) . '">' . $this->escapeHtml($record['group_navigation_name']) . '</strong>' . '</a>',
+        $data['status'][$record['group_navigation_status']],
+        '<a href="' . $this->url('admin/default', array('controller' => 'navigation', 'action' => 'index'), array('query' => array('group_navigation_id' => $record['group_navigation_id']))) . '"><button type="button" class="btn btn-default btn-xs"><span class="fa fa-sitemap" aria-hidden="true"></span> Liên kết
+</button></a>',
+    ];
+}
+?>
+
+<table class="table table-striped jambo_table bulk_action">
+    <?php echo $this->partial('admin/partial/table_column_name', ['columnName' => $columnName]); ?>
+    <?php echo $this->partial('admin/partial/table_column_data', ['columnData' => $columnData, 'module' => $module]); ?>
+</table>
